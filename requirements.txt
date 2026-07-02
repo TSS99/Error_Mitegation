@@ -1,5 +1,6 @@
 ipykernel
 jupyterlab
 nbformat
+matplotlib
 numpy
 pyquil
