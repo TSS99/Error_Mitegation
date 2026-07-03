@@ -10,19 +10,22 @@ We prepare a 2-qubit Bell state, $\vert\Phi^+\rangle$, using a Hadamard gate ($H
 Starting from the ground state $\vert 00 \rangle$:
 
 1. Apply Hadamard gate $H$ to the first qubit:
-$$
-(H \otimes I)\vert 00 \rangle = \frac{1}{\sqrt{2}}(\vert 0 \rangle + \vert 1 \rangle) \otimes \vert 0 \rangle = \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 10 \rangle)
-$$
+
+   $$
+   (H \otimes I)\vert 00 \rangle = \frac{1}{\sqrt{2}}(\vert 0 \rangle + \vert 1 \rangle) \otimes \vert 0 \rangle = \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 10 \rangle)
+   $$
 
 2. Apply CNOT gate (controlled by qubit 0, targeting qubit 1):
-$$
-\mathrm{CNOT}_{0 \to 1} \left[ \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 10 \rangle) \right] = \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 11 \rangle) = \vert\Phi^+\rangle
-$$
+
+   $$
+   \mathrm{CNOT}_{0 \to 1} \left[ \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 10 \rangle) \right] = \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 11 \rangle) = \vert\Phi^+\rangle
+   $$
 
 ### Joint Expectation Value ⟨ZZ⟩
 We want to measure the expectation value of the joint operator $Z \otimes Z$, which measures the correlation between the two qubits. The Pauli-Z operator has eigenvalues $+1$ (for state $\vert 0 \rangle$) and $-1$ (for state $\vert 1 \rangle$).
 
 The action of $Z \otimes Z$ on the basis states is:
+
 $$
 \begin{aligned}
 (Z \otimes Z)\vert 00 \rangle &= (+1)(+1)\vert 00 \rangle = \vert 00 \rangle \\
@@ -31,16 +34,19 @@ $$
 $$
 
 Thus, the action of $Z \otimes Z$ on the Bell state $\vert\Phi^+\rangle$ is:
+
 $$
 (Z \otimes Z)\vert\Phi^+\rangle = (Z \otimes Z) \left[ \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 11 \rangle) \right] = \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 11 \rangle) = \vert\Phi^+\rangle
 $$
 
 The ideal expectation value is:
+
 $$
 \langle ZZ \rangle_{\mathrm{ideal}} = \langle \Phi^+ \vert Z \otimes Z \vert \Phi^+ \rangle = \langle \Phi^+ \vert \Phi^+ \rangle = 1.0
 $$
 
 In terms of measurement probabilities, since $P(00) = 0.5$, $P(11) = 0.5$, and $P(01) = P(10) = 0$:
+
 $$
 \langle ZZ \rangle = P(00) + P(11) - P(01) - P(10) = 0.5 + 0.5 - 0 - 0 = 1.0
 $$
@@ -53,9 +59,11 @@ Readout noise occurs when a qubit is correctly prepared and processed, but the m
 
 ### Single-Qubit Readout Noise
 We model the measurement error on a single qubit as a symmetric bit-flip channel with error probability $e$. The transition matrix $K$ is:
+
 $$
 K = \begin{pmatrix} 1 - e & e \\ e & 1 - e \end{pmatrix}
 $$
+
 where:
 
 * $K_{0,0} = P(\text{observe } 0 \mid \text{true state is } 0) = 1 - e$
@@ -64,6 +72,7 @@ where:
 
 ### Two-Qubit Readout Noise (Confusion Matrix)
 For a 2-qubit system, assuming the noise on each qubit is independent, the global transition probability matrix $M$ is the tensor product:
+
 $$
 M = K \otimes K
 $$
@@ -83,11 +92,13 @@ $$
 
 ### Effect of Noise on Probabilities
 Let $\mathbf{x}$ be the vector of true state probabilities and $\mathbf{y}$ be the vector of noisy observed probabilities:
+
 $$
 \mathbf{x} = \begin{pmatrix} P_{\mathrm{ideal}}(00) \\ P_{\mathrm{ideal}}(01) \\ P_{\mathrm{ideal}}(10) \\ P_{\mathrm{ideal}}(11) \end{pmatrix} = \begin{pmatrix} 0.5 \\ 0.0 \\ 0.0 \\ 0.5 \end{pmatrix}
 $$
 
 The noisy observed probabilities are calculated by $\mathbf{y} = M\mathbf{x}$:
+
 $$
 \begin{aligned}
 y_{00} &= 0.5(1-e)^2 + 0.5e^2 = 0.5(1 - 2e + 2e^2) \\
@@ -98,6 +109,7 @@ y_{11} &= 0.5e^2 + 0.5(1-e)^2 = 0.5(1 - 2e + 2e^2)
 $$
 
 For the simulated readout error rate $e = 0.08$ ($8\%$):
+
 $$
 \begin{aligned}
 y_{00} &= 0.5(0.92^2 + 0.08^2) = 0.5(0.8464 + 0.0064) = 0.4264 \\
@@ -108,6 +120,7 @@ y_{11} &= 0.4264
 $$
 
 The expectation value under readout noise is:
+
 $$
 \begin{aligned}
 \langle ZZ \rangle_{\mathrm{noisy}} &= y_{00} + y_{11} - y_{01} - y_{10} \\
@@ -123,11 +136,13 @@ Readout mitigation aims to reconstruct the true probability distribution $\mathb
 
 ### Mathematical Correction
 Since the noise model is linear:
+
 $$
 \mathbf{y} = M\mathbf{x}
 $$
 
 If the confusion matrix $M$ is invertible (which is true as long as $e \neq 0.5$), we can retrieve the ideal probabilities $\mathbf{x}$ by multiplying both sides by the inverse of $M$:
+
 $$
 \mathbf{x} = M^{-1}\mathbf{y}
 $$
@@ -147,11 +162,13 @@ Zero-Noise Extrapolation (ZNE) requires running the quantum circuit at different
 
 ### Mathematical Invariance
 Let $\mathrm{CNOT}$ be the unitary operator representing the gate. Because a CNOT gate is its own self-inverse, applying it twice results in the identity operator:
+
 $$
 \mathrm{CNOT}^2 = I
 $$
 
 For any odd scale factor $S = 2k + 1$ (where $k \ge 0$ is an integer):
+
 $$
 \begin{aligned}
 \mathrm{CNOT}^{2k+1} &= (\mathrm{CNOT}^2)^k \mathrm{CNOT} \\
@@ -170,18 +187,22 @@ We collect the noisy expectation values $E(S)$ at different noise scale factors 
 
 ### Linear Fit Model
 We assume that for small scale factors, the expectation value decays linearly with the noise scale:
+
 $$
 E(S) = mS + b
 $$
+
 where:
 * $m$ is the slope of the error decay.
 * $b$ is the y-intercept, representing the simulated expectation value at zero noise ($S = 0$):
-$$
-E(0) = b
-$$
+
+  $$
+  E(0) = b
+  $$
 
 ### Linear Regression Math
 Using the method of least squares, the parameters $m$ and $b$ for $N$ data points $(S_i, E_i)$ are given by:
+
 $$
 \begin{aligned}
 m &= \frac{N \sum (S_i E_i) - (\sum S_i)(\sum E_i)}{N \sum S_i^2 - (\sum S_i)^2} \\
