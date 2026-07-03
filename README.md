@@ -9,17 +9,17 @@ We prepare a 2-qubit Bell state, $\vert\Phi^+\rangle$, using a Hadamard gate ($H
 ### Step-by-Step State Preparation
 Starting from the ground state $\vert 00 \rangle$:
 
-1. Apply Hadamard gate $H$ to the first qubit:
+**Step 1: Apply Hadamard gate $H$ to the first qubit.**
 
-   $$
-   (H \otimes I)\vert 00 \rangle = \frac{1}{\sqrt{2}}(\vert 0 \rangle + \vert 1 \rangle) \otimes \vert 0 \rangle = \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 10 \rangle)
-   $$
+$$
+(H \otimes I)\vert 00 \rangle = \frac{1}{\sqrt{2}}(\vert 0 \rangle + \vert 1 \rangle) \otimes \vert 0 \rangle = \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 10 \rangle)
+$$
 
-2. Apply CNOT gate (controlled by qubit 0, targeting qubit 1):
+**Step 2: Apply CNOT gate (controlled by qubit 0, targeting qubit 1).**
 
-   $$
-   \mathrm{CNOT}_{0 \to 1} \left[ \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 10 \rangle) \right] = \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 11 \rangle) = \vert\Phi^+\rangle
-   $$
+$$
+\mathrm{CNOT}_{0 \to 1} \left[ \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 10 \rangle) \right] = \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 11 \rangle) = \vert\Phi^+\rangle
+$$
 
 ### Joint Expectation Value ⟨ZZ⟩
 We want to measure the expectation value of the joint operator $Z \otimes Z$, which measures the correlation between the two qubits. The Pauli-Z operator has eigenvalues $+1$ (for state $\vert 0 \rangle$) and $-1$ (for state $\vert 1 \rangle$).
@@ -194,11 +194,13 @@ $$
 
 where:
 * $m$ is the slope of the error decay.
-* $b$ is the y-intercept, representing the simulated expectation value at zero noise ($S = 0$):
+* $b$ is the y-intercept, representing the simulated expectation value at zero noise ($S = 0$).
 
-  $$
-  E(0) = b
-  $$
+In particular:
+
+$$
+E(0) = b
+$$
 
 ### Linear Regression Math
 Using the method of least squares, the parameters $m$ and $b$ for $N$ data points $(S_i, E_i)$ are given by:
