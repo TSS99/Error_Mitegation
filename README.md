@@ -7,32 +7,32 @@
 We prepare a 2-qubit Bell state, $\vert\Phi^+\rangle$, using a Hadamard gate ($H$) on qubit 0 followed by a CNOT gate with qubit 0 as control and qubit 1 as target.
 
 ### Step-by-Step State Preparation
-Starting from the ground state $|00\rangle$:
+Starting from the ground state $\vert 00 \rangle$:
 
 1. Apply Hadamard gate $H$ to the first qubit:
 $$
-(H \otimes I)|00\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle) \otimes |0\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |10\rangle)
+(H \otimes I)\vert 00 \rangle = \frac{1}{\sqrt{2}}(\vert 0 \rangle + \vert 1 \rangle) \otimes \vert 0 \rangle = \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 10 \rangle)
 $$
 
 2. Apply CNOT gate (controlled by qubit 0, targeting qubit 1):
 $$
-\text{CNOT}_{0 \to 1} \left[ \frac{1}{\sqrt{2}}(|00\rangle + |10\rangle) \right] = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) = \vert\Phi^+\rangle
+\mathrm{CNOT}_{0 \to 1} \left[ \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 10 \rangle) \right] = \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 11 \rangle) = \vert\Phi^+\rangle
 $$
 
 ### Joint Expectation Value ⟨ZZ⟩
-We want to measure the expectation value of the joint operator $Z \otimes Z$, which measures the correlation between the two qubits. The Pauli-Z operator has eigenvalues $+1$ (for state $|0\rangle$) and $-1$ (for state $|1\rangle$).
+We want to measure the expectation value of the joint operator $Z \otimes Z$, which measures the correlation between the two qubits. The Pauli-Z operator has eigenvalues $+1$ (for state $\vert 0 \rangle$) and $-1$ (for state $\vert 1 \rangle$).
 
 The action of $Z \otimes Z$ on the basis states is:
 $$
 \begin{aligned}
-(Z \otimes Z)|00\rangle &= (+1)(+1)|00\rangle = |00\rangle \\
-(Z \otimes Z)|11\rangle &= (-1)(-1)|11\rangle = |11\rangle
+(Z \otimes Z)\vert 00 \rangle &= (+1)(+1)\vert 00 \rangle = \vert 00 \rangle \\
+(Z \otimes Z)\vert 11 \rangle &= (-1)(-1)\vert 11 \rangle = \vert 11 \rangle
 \end{aligned}
 $$
 
 Thus, the action of $Z \otimes Z$ on the Bell state $\vert\Phi^+\rangle$ is:
 $$
-(Z \otimes Z)\vert\Phi^+\rangle = (Z \otimes Z) \left[ \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) \right] = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) = \vert\Phi^+\rangle
+(Z \otimes Z)\vert\Phi^+\rangle = (Z \otimes Z) \left[ \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 11 \rangle) \right] = \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 11 \rangle) = \vert\Phi^+\rangle
 $$
 
 The ideal expectation value is:
@@ -49,7 +49,7 @@ $$
 
 ## 2. Readout Noise Model
 
-Readout noise occurs when a qubit is correctly prepared and processed, but the measurement device misidentifies the state (e.g., records a $|0\rangle$ as a $|1\rangle$).
+Readout noise occurs when a qubit is correctly prepared and processed, but the measurement device misidentifies the state (e.g., records a $\vert 0 \rangle$ as a $\vert 1 \rangle$).
 
 ### Single-Qubit Readout Noise
 We model the measurement error on a single qubit as a symmetric bit-flip channel with error probability $e$. The transition matrix $K$ is:
@@ -110,8 +110,8 @@ $$
 The expectation value under readout noise is:
 $$
 \begin{aligned}
-\langle ZZ \rangle_{\text{noisy}} &= y_{00} + y_{11} - y_{01} - y_{10} \\
-\langle ZZ \rangle_{\text{noisy}} &= 0.4264 + 0.4264 - 0.0736 - 0.0736 = 0.7056
+\langle ZZ \rangle_{\mathrm{noisy}} &= y_{00} + y_{11} - y_{01} - y_{10} \\
+\langle ZZ \rangle_{\mathrm{noisy}} &= 0.4264 + 0.4264 - 0.0736 - 0.0736 = 0.7056
 \end{aligned}
 $$
 
@@ -166,7 +166,7 @@ Thus, in a noiseless simulator, folding a gate does not change the final quantum
 
 ## 5. Zero-Noise Extrapolation (ZNE)
 
-We collect the noisy expectation values $E(S)$ at different noise scale factors $S \in \{1, 3, 5\}$ and fit a curve to extrapolate the value at $S = 0$ (zero noise).
+We collect the noisy expectation values $E(S)$ at different noise scale factors $S \in \lbrace 1, 3, 5 \rbrace$ and fit a curve to extrapolate the value at $S = 0$ (zero noise).
 
 ### Linear Fit Model
 We assume that for small scale factors, the expectation value decays linearly with the noise scale:
