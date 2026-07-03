@@ -1,7 +1,5 @@
 # Mathematical Guide to Quantum Error Mitigation
 
-This guide provides a step-by-step mathematical explanation of the quantum error mitigation techniques demonstrated in the notebook [pyquil_error_mitigation_july_1_to_5.executed.ipynb](file:///d:/CDAC%20Projects/Error%20Mitegation/pyquil_error_mitigation_july_1_to_5.executed.ipynb).
-
 ---
 
 ## 1. Ideal Bell State and Joint Expectation Value
